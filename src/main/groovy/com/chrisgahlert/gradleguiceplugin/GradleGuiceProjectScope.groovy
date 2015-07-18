@@ -36,12 +36,7 @@ class GradleGuiceProjectScope implements Scope {
     }
 
     private Map<Key, Object> getProjectScope() {
-        def project = current.get()
-        if(project == null) {
-            throw new RuntimeException("Illegal project scope access outside of being in a project scope")
-        }
-
-        def extraProps = project.extensions.extraProperties
+        def extraProps = getCurrent().extensions.extraProperties
 
         if(!extraProps.has(SCOPE_PROPERTY)) {
             extraProps.set(SCOPE_PROPERTY, new HashMap<Key, Object>())
@@ -56,5 +51,15 @@ class GradleGuiceProjectScope implements Scope {
 
     public void leave() {
         this.current.remove()
+    }
+    
+    public Project getCurrent() {
+        def project = current.get()
+        
+        if(project == null) {
+            throw new RuntimeException("Illegal project scope access outside of being in a project scope")
+        }
+        
+        project
     }
 }

@@ -17,7 +17,7 @@ class GradleInjector {
     public static final String MODULE_PROPERTY = 'guiceModule'
 
     static public void inject(Object instance, Project context) {
-        def injector = getInjector(context.rootProject.extensions.extraProperties);
+        def injector = getInjector(context);
         def scope = injector.getInstance(GradleGuiceProjectScope)
 
         scope.enter(context)
@@ -29,7 +29,7 @@ class GradleInjector {
     }
     
     static public <T> T getInstance(Project context, Class<T> instanceClass) {
-        def injector = getInjector(context.rootProject.extensions.extraProperties);
+        def injector = getInjector(context);
         def scope = injector.getInstance(GradleGuiceProjectScope)
 
         scope.enter(context)
@@ -40,7 +40,9 @@ class GradleInjector {
         }
     }
 
-    static protected Injector createInjector(ExtraPropertiesExtension props) {
+    static protected Injector createInjector(Project context) {
+        ExtraPropertiesExtension props = context.rootProject.extensions.extraProperties
+        
         def moduleClass = props.get(MODULE_PROPERTY)
         if(!moduleClass) {
             throw new InvalidUserDataException("The extra-Property '$MODULE_PROPERTY' has not been set (gradle-guice-plugin)")
@@ -55,12 +57,14 @@ class GradleInjector {
             moduleInstance = Class.forName(moduleClass.toString()).newInstance()
         }
 
-        Guice.createInjector(new GradleGuiceModule(), (Module) moduleInstance)
+        Guice.createInjector(new GradleGuiceModule(context), (Module) moduleInstance)
     }
 
-    static protected Injector getInjector(ExtraPropertiesExtension props) {
+    static protected Injector getInjector(Project context) {
+        ExtraPropertiesExtension props = context.rootProject.extensions.extraProperties
+        
         if(!props.has(INJECTOR_PROPERTY)) {
-            props.set(INJECTOR_PROPERTY, createInjector(props))
+            props.set(INJECTOR_PROPERTY, createInjector(context))
         }
 
         props.get(INJECTOR_PROPERTY) as Injector
