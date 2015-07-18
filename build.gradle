@@ -1,5 +1,5 @@
 group 'com.chrisgahlert'
-version '0.3.1'
+version '0.4.0'
 
 buildscript {
     repositories {
@@ -57,7 +57,7 @@ pluginBundle {
     plugins {
         guicePlugin {
             id = 'com.chrisgahlert.gradle-guice-plugin'
-            displayName = 'Gradle Guice Plugin'
+            displayName = 'Gradle Guice Plugin (dummy)'
         }
     }
 }
