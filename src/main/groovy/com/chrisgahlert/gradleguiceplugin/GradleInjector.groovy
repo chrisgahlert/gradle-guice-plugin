@@ -17,7 +17,7 @@ class GradleInjector {
     public static final String MODULE_PROPERTY = 'guiceModule'
 
     static public void inject(Object instance, Project context) {
-        def injector = getInjector(context.rootProject.extensions.extraProperties);
+        def injector = getInjector(context);
         def scope = injector.getInstance(GradleGuiceProjectScope)
 
         scope.enter(context)
@@ -46,7 +46,9 @@ class GradleInjector {
         Guice.createInjector(new GradleGuiceModule(), (Module) moduleInstance)
     }
 
-    static protected Injector getInjector(ExtraPropertiesExtension props) {
+    static public Injector getInjector(Project context) {
+        ExtraPropertiesExtension props = context.rootProject.extensions.extraProperties
+        
         if(!props.has(INJECTOR_PROPERTY)) {
             props.set(INJECTOR_PROPERTY, createInjector(props))
         }
