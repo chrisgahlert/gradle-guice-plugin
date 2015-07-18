@@ -1,6 +1,6 @@
 package com.chrisgahlert.gradleguiceplugin
 
-import com.chrisgahlert.gradleguiceplugin.annotations.ProjectScoped
+import com.chrisgahlert.gradleguiceplugin.annotations.ProjectScope
 import com.chrisgahlert.gradleguiceplugin.gradle.GuicePlugin
 import com.google.inject.Binder
 import com.google.inject.Inject
@@ -59,7 +59,7 @@ class ProjectScopeInjectionTest extends IntegrationSpec {
         void setName(String name);
     }
 
-    @ProjectScoped
+    @ProjectScope
     public static class SharedPojoImpl implements ISharedPojo {
         def name = "first"
 

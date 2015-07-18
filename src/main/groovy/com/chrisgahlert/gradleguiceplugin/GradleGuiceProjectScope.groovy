@@ -57,7 +57,7 @@ class GradleGuiceProjectScope implements Scope {
         def project = current.get()
         
         if(project == null) {
-            throw new RuntimeException("Illegal project scope access outside of being in a project scope")
+            throw new RuntimeException("Illegal project scope access while not being in a project scope")
         }
         
         project

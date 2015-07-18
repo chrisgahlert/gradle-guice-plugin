@@ -1,5 +1,5 @@
 group 'com.chrisgahlert'
-version '0.3.0'
+version '0.3.1'
 
 buildscript {
     repositories {
@@ -39,14 +39,20 @@ dependencies {
     testCompile 'com.netflix.nebula:nebula-test:2.2.1'
 }
 
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
 artifacts {
     archives jar
+    archives sourcesJar
 }
 
 pluginBundle {
     website = vcsUrl = 'http://github.com/chrisgahlert/gradle-guice-plugin'
-    description = 'Plugin for using Guice in Plugin development'
-    tags = ['guice']
+    description = 'Plugin for using Guice dependency injection in plugin development'
+    tags = ['guice', 'dependency', 'injection', 'plugin', 'development']
 
     plugins {
         guicePlugin {
@@ -55,3 +61,4 @@ pluginBundle {
         }
     }
 }
+publishPlugins.dependsOn test
