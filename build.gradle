@@ -1,6 +1,18 @@
 group 'com.chrisgahlert'
 version '0.1-SNAPSHOT'
 
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "com.gradle.publish:plugin-publish-plugin:0.9.1"
+    }
+}
+
+apply plugin: 'com.gradle.plugin-publish'
 apply plugin: 'groovy'
 apply plugin: 'java'
 apply plugin: 'idea'
@@ -29,4 +41,17 @@ dependencies {
 
 artifacts {
     archives jar
+}
+
+pluginBundle {
+    website = vcsUrl = 'http://github.com/chrisgahlert/gradle-guice-plugin'
+    description = 'Plugin for using Guice in Plugin development'
+    tags = ['guice']
+
+    plugins {
+        guicePlugin {
+            id = 'com.chrisgahlert.gradle-guice-plugin'
+            displayName = 'Gradle Guice Plugin'
+        }
+    }
 }
