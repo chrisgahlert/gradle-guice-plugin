@@ -9,14 +9,23 @@ import org.gradle.api.Project
 import org.gradle.api.plugins.ExtraPropertiesExtension
 
 /**
- * Created by Chris on 22.07.2015.
+ * This class is the actual injector which makes use of Gradle project scope.
+ *
+ * @see GradleGuiceProjectScope
+ * @see com.chrisgahlert.gradleguiceplugin.annotations.ProjectScope
  */
 @CompileStatic
 class GradleInjector {
     public static final String INJECTOR_PROPERTY = 'gradle-juice-plugin-injector'
     public static final String MODULE_PROPERTY = 'guiceModule'
 
-    static public void inject(Object instance, Project context) {
+    /**
+     * Injects all methods/fields annotated with {@link com.google.inject.Inject}.
+     *
+     * @param context The Gradle project scope to use
+     * @param instance The instance whose methods/fields should be injected
+     */
+    static public void inject(Project context, Object instance) {
         def injector = getInjector(context);
         def scope = injector.getInstance(GradleGuiceProjectScope)
 
@@ -27,7 +36,14 @@ class GradleInjector {
             scope.leave()
         }
     }
-    
+
+    /**
+     * Get's an instance for the injector.
+     *
+     * @param context The Gradle project scope to use
+     * @param instanceClass The requested type which should be passed to Guice
+     * @return
+     */
     static public <T> T getInstance(Project context, Class<T> instanceClass) {
         def injector = getInjector(context);
         def scope = injector.getInstance(GradleGuiceProjectScope)

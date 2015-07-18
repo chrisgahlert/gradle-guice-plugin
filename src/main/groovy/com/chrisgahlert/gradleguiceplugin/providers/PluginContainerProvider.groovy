@@ -6,9 +6,6 @@ import groovy.transform.CompileStatic
 import org.gradle.api.Project
 import org.gradle.api.plugins.PluginContainer
 
-/**
- * Created by Chris on 23.07.2015.
- */
 @CompileStatic
 class PluginContainerProvider implements Provider<PluginContainer> {
 

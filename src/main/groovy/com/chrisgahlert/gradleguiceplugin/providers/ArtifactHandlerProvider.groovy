@@ -6,9 +6,6 @@ import groovy.transform.CompileStatic
 import org.gradle.api.Project
 import org.gradle.api.artifacts.dsl.ArtifactHandler
 
-/**
- * Created by Chris on 23.07.2015.
- */
 @CompileStatic
 class ArtifactHandlerProvider implements Provider<ArtifactHandler> {
 

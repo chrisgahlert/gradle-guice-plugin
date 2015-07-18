@@ -8,7 +8,7 @@ import groovy.transform.CompileStatic
 import org.gradle.api.Project
 
 /**
- * Created by Chris on 22.07.2015.
+ * This is the implementation for the {@link com.chrisgahlert.gradleguiceplugin.annotations.ProjectScope} scope.
  */
 class GradleGuiceProjectScope implements Scope {
     public static final String SCOPE_PROPERTY = 'gradle-guice-plugin-scope'

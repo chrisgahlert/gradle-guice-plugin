@@ -5,14 +5,17 @@ import groovy.transform.CompileStatic
 import org.gradle.api.DefaultTask
 
 /**
- * Created by Chris on 22.07.2015.
+ * This task provides Guice dependency injection when used as a super class.
+ *
+ * All methods/members annotated with {@link com.google.inject.Inject} will be automatically injected before
+ * the task is executed.
  */
 @CompileStatic
 class GuiceDefaultTask extends DefaultTask {
 
     @Override
     public void executeWithoutThrowingTaskFailure() {
-        GradleInjector.inject(this, getProject())
+        GradleInjector.inject(getProject(), this)
         super.executeWithoutThrowingTaskFailure()
     }
 }

@@ -29,7 +29,7 @@ import org.gradle.api.plugins.PluginContainer
 import org.gradle.api.tasks.TaskContainer
 
 /**
- * Created by Chris on 22.07.2015.
+ * This is the plugin's default Guice module binding all global and project scoped services.
  */
 @CompileStatic
 class GradleGuiceModule implements Module {

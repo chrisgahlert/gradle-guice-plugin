@@ -6,14 +6,17 @@ import org.gradle.api.Plugin
 import org.gradle.api.Project
 
 /**
- * Created by Chris on 21.07.2015.
+ * This plugin should be used when using Guice.
+ *
+ * All methods/members annotated with {@link com.google.inject.Inject} will be automatically injected before
+ * the {@link GuicePlugin#doApply(org.gradle.api.Project)} method is called.
  */
 @CompileStatic
 abstract public class GuicePlugin implements Plugin<Project> {
 
     @Override
     final public void apply(Project project) {
-        GradleInjector.inject(this, project)
+        GradleInjector.inject(project, this)
         doApply(project)
     }
 
