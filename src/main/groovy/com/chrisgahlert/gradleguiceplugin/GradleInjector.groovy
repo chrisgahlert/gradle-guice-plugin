@@ -3,6 +3,7 @@ package com.chrisgahlert.gradleguiceplugin
 import com.google.inject.Guice
 import com.google.inject.Injector
 import com.google.inject.Module
+import groovy.transform.CompileStatic
 import org.gradle.api.InvalidUserDataException
 import org.gradle.api.Project
 import org.gradle.api.plugins.ExtraPropertiesExtension
@@ -10,6 +11,7 @@ import org.gradle.api.plugins.ExtraPropertiesExtension
 /**
  * Created by Chris on 22.07.2015.
  */
+@CompileStatic
 class GradleInjector {
     public static final String INJECTOR_PROPERTY = 'gradle-juice-plugin-injector'
     public static final String MODULE_PROPERTY = 'guiceModule'
@@ -18,7 +20,7 @@ class GradleInjector {
         def injector = getInjector(context.rootProject.extensions.extraProperties);
         def scope = injector.getInstance(GradleGuiceProjectScope)
 
-        scope.enter(scope)
+        scope.enter(context)
         try {
             injector.injectMembers(instance)
         } finally {
@@ -41,7 +43,7 @@ class GradleInjector {
             moduleInstance = Class.forName(moduleClass.toString()).newInstance()
         }
 
-        Guice.createInjector(new GradleGuiceModule(), moduleInstance)
+        Guice.createInjector(new GradleGuiceModule(), (Module) moduleInstance)
     }
 
     static protected Injector getInjector(ExtraPropertiesExtension props) {
