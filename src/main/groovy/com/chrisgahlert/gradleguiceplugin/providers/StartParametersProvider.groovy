@@ -8,14 +8,9 @@ import org.gradle.api.Project;
 
 class StartParametersProvider implements Provider<StartParameter>
 {
+    @Inject
     private Provider<Project> projectProvider;
     
-    @Inject
-    public StartParametersProvider(Provider<Project> projectProvider)
-    {
-        this.projectProvider = projectProvider;
-    }
-
     @Override
     public StartParameter get()
     {
