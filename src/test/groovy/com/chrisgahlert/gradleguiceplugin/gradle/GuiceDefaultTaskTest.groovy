@@ -8,9 +8,6 @@ import nebula.test.IntegrationSpec
 import org.gradle.api.logging.Logger
 import org.gradle.api.tasks.TaskAction
 
-/**
- * Created by Chris on 23.07.2015.
- */
 class GuiceDefaultTaskTest extends IntegrationSpec {
 
     def "default task should work"() {

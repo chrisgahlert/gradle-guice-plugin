@@ -10,9 +10,6 @@ import org.gradle.api.Project
 import org.gradle.api.Task
 import org.gradle.api.logging.Logger
 
-/**
- * Created by Chris on 23.07.2015.
- */
 class GuiceTaskActionTest extends IntegrationSpec {
 
     def "task action should work"() {

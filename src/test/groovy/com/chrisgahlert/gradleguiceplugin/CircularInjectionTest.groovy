@@ -1,20 +1,16 @@
 package com.chrisgahlert.gradleguiceplugin
 
+import com.chrisgahlert.gradleguiceplugin.annotations.ProjectScope
 import com.chrisgahlert.gradleguiceplugin.gradle.GuicePlugin
 import com.google.inject.Binder
 import com.google.inject.Inject
 import com.google.inject.Module
 import nebula.test.IntegrationSpec
 import org.gradle.api.Project
-import org.gradle.api.logging.LogLevel
 
-class SimpleInjectionTest extends IntegrationSpec {
+class CircularInjectionTest extends IntegrationSpec {
 
-    def setup() {
-        logLevel = LogLevel.QUIET
-    }
-
-    def "basic string injection should work"() {
+    def "circular injection should work"() {
         given:
         buildFile << """
             ext {
@@ -28,17 +24,30 @@ class SimpleInjectionTest extends IntegrationSpec {
         def result = runTasksSuccessfully 'help'
 
         then:
-        result.standardOutput.contains "teststr"
+        result.standardOutput.contains "assertions completed"
+    }
+
+    @ProjectScope
+    public static class A {
+        @Inject final public B b
+    }
+
+    @ProjectScope
+    public static class B {
+        @Inject final public A a
     }
 
     public static class TestPlugin extends GuicePlugin {
 
-        @Inject
-        private String test;
+        @Inject A localA
+        @Inject B localB
 
         @Override
         void doApply(Project project) {
-            project.logger.warn test
+            assert localA.b.is(localB)
+            assert localB.a.is(localA)
+
+            project.logger.warn "assertions completed"
         }
     }
 
@@ -46,7 +55,9 @@ class SimpleInjectionTest extends IntegrationSpec {
 
         @Override
         void configure(Binder binder) {
-            binder.bind(String).toInstance("teststr")
+            binder.bind(A)
+            binder.bind(B)
         }
     }
+
 }

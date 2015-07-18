@@ -9,9 +9,6 @@ import nebula.test.IntegrationSpec
 import org.gradle.api.Project
 import org.gradle.api.logging.LogLevel
 
-/**
- * Created by Chris on 21.07.2015.
- */
 class ProjectScopeInjectionTest extends IntegrationSpec {
     def setup() {
         logLevel = LogLevel.QUIET

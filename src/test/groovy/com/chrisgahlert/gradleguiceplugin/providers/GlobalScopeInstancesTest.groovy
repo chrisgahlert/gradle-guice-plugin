@@ -11,9 +11,6 @@ import org.gradle.api.execution.TaskExecutionGraph
 import org.gradle.api.invocation.Gradle
 import org.gradle.api.logging.LogLevel
 
-/**
- * Created by Chris on 23.07.2015.
- */
 class GlobalScopeInstancesTest extends IntegrationSpec {
 
     def setup() {

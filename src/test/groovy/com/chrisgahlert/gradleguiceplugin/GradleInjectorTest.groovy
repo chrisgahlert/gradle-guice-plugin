@@ -4,9 +4,6 @@ import com.google.inject.Binder
 import com.google.inject.Module
 import nebula.test.IntegrationSpec
 
-/**
- * Created by Chris on 23.07.2015.
- */
 class GradleInjectorTest extends IntegrationSpec {
 
     def "get instance should work and the injector should take a string argument"() {

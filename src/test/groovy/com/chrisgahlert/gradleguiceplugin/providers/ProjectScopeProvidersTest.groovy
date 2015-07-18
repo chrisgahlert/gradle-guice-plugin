@@ -16,9 +16,6 @@ import org.gradle.api.plugins.ExtensionContainer
 import org.gradle.api.plugins.PluginContainer
 import org.gradle.api.tasks.TaskContainer
 
-/**
- * Created by Chris on 23.07.2015.
- */
 class ProjectScopeProvidersTest extends IntegrationSpec {
 
     def setup() {
