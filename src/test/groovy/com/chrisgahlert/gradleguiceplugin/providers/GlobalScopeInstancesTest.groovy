@@ -1,4 +1,4 @@
-package com.chrisgahlert.gradleguiceplugin
+package com.chrisgahlert.gradleguiceplugin.providers
 
 import com.chrisgahlert.gradleguiceplugin.gradle.GuicePlugin
 import com.google.inject.Binder
