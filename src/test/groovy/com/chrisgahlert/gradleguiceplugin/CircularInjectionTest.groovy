@@ -7,6 +7,7 @@ import com.google.inject.Inject
 import com.google.inject.Module
 import nebula.test.IntegrationSpec
 import org.gradle.api.Project
+import org.gradle.api.logging.Logger
 
 class CircularInjectionTest extends IntegrationSpec {
 
@@ -41,13 +42,14 @@ class CircularInjectionTest extends IntegrationSpec {
 
         @Inject A localA
         @Inject B localB
+        @Inject Logger logger
 
         @Override
-        void doApply(Project project) {
+        void doApply() {
             assert localA.b.is(localB)
             assert localB.a.is(localA)
 
-            project.logger.warn "assertions completed"
+            logger.warn "assertions completed"
         }
     }
 

@@ -18,8 +18,8 @@ abstract class GuiceProjectAction implements Action<Project> {
     @Override
     final public void execute(Project project) {
         GradleInjector.inject(project, this)
-        doExecute(project)
+        doExecute()
     }
 
-    abstract public void doExecute(Project project)
+    abstract public void doExecute()
 }

@@ -10,6 +10,6 @@ import org.gradle.api.Project
 @CompileStatic
 class DefaultPlugin extends GuicePlugin {
     @Override
-    void doApply(Project project) {
+    void doApply() {
     }
 }

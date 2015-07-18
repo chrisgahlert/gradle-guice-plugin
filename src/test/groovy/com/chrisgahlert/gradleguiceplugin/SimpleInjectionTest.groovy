@@ -7,6 +7,7 @@ import com.google.inject.Module
 import nebula.test.IntegrationSpec
 import org.gradle.api.Project
 import org.gradle.api.logging.LogLevel
+import org.gradle.api.logging.Logger
 
 class SimpleInjectionTest extends IntegrationSpec {
 
@@ -33,12 +34,12 @@ class SimpleInjectionTest extends IntegrationSpec {
 
     public static class TestPlugin extends GuicePlugin {
 
-        @Inject
-        private String test;
+        @Inject private String test
+        @Inject Logger logger
 
         @Override
-        void doApply(Project project) {
-            project.logger.warn test
+        void doApply() {
+            logger.warn test
         }
     }
 

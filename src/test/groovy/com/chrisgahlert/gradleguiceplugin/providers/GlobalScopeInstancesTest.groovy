@@ -44,9 +44,10 @@ class GlobalScopeInstancesTest extends IntegrationSpec {
         @Inject Gradle gradle
         @Inject StartParameter startParameter
         @Inject TaskExecutionGraph taskGraph
+        @Inject Project project
 
         @Override
-        void doApply(Project project) {
+        void doApply() {
             assert project.gradle.is(gradle)
             assert project.gradle.startParameter.is(startParameter)
             assert project.gradle.taskGraph.is(taskGraph)

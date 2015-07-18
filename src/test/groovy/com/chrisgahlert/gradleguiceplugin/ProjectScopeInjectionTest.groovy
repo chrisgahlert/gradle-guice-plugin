@@ -37,11 +37,11 @@ class ProjectScopeInjectionTest extends IntegrationSpec {
     }
 
     public static class TestPlugin extends GuicePlugin {
-        @Inject
-        ISharedPojo pojo
+        @Inject ISharedPojo pojo
+        @Inject Project project
 
         @Override
-        void doApply(Project project) {
+        void doApply() {
             project.logger.warn "$project.path: $pojo.name"
         }
 

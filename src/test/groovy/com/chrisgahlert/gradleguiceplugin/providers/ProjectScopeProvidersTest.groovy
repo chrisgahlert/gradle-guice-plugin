@@ -87,25 +87,25 @@ class ProjectScopeProvidersTest extends IntegrationSpec {
 
     public static class TestPlugin extends GuicePlugin {
 
+        @Inject Project project
+
         @Inject ArtifactHandler artifacts
         @Inject ConfigurationContainer configurations
         @Inject DependencyHandler dependencies
         @Inject ExtensionContainer extensions
         @Inject Logger logger
         @Inject PluginContainer plugins
-        @Inject Project injectedProject
         @Inject RepositoryHandler repositories
         @Inject TaskContainer tasks
 
         @Override
-        void doApply(Project project) {
+        void doApply() {
             assert project.artifacts.is(artifacts)
             assert project.configurations.is(configurations)
             assert project.dependencies.is(dependencies)
             assert project.extensions.is(extensions)
             assert project.logger.is(logger)
             assert project.plugins.is(plugins)
-            assert project.is(injectedProject)
             assert project.repositories.is(repositories)
             assert project.tasks.is(tasks)
 

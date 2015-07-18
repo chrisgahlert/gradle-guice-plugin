@@ -12,13 +12,13 @@ import org.gradle.api.Project
  * the {@link GuicePlugin#doApply(org.gradle.api.Project)} method is called.
  */
 @CompileStatic
-abstract public class GuicePlugin implements Plugin<Project> {
+abstract class GuicePlugin implements Plugin<Project> {
 
     @Override
     final public void apply(Project project) {
         GradleInjector.inject(project, this)
-        doApply(project)
+        doApply()
     }
 
-    abstract public void doApply(Project project)
+    abstract public void doApply()
 }

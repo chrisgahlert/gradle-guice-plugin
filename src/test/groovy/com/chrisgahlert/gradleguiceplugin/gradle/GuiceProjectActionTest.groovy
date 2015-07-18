@@ -42,7 +42,7 @@ class GuiceProjectActionTest extends IntegrationSpec {
         @Inject Logger logger
 
         @Override
-        void doExecute(Project project) {
+        void doExecute() {
             logger.warn test
         }
     }

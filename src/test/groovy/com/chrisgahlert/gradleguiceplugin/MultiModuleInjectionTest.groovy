@@ -8,6 +8,7 @@ import com.google.inject.Singleton
 import nebula.test.IntegrationSpec
 import org.gradle.api.Project
 import org.gradle.api.logging.LogLevel
+import org.gradle.api.logging.Logger
 
 class MultiModuleInjectionTest extends IntegrationSpec {
     def setup() {
@@ -37,12 +38,13 @@ class MultiModuleInjectionTest extends IntegrationSpec {
     }
 
     public static class TestPlugin extends GuicePlugin {
-        @Inject
-        ISharedPojo pojo
+        @Inject ISharedPojo pojo
+        @Inject Logger logger
+        @Inject Project project
 
         @Override
-        void doApply(Project project) {
-            project.logger.warn "$project.path: $pojo.name"
+        void doApply() {
+            logger.warn "$project.path: $pojo.name"
             pojo.name = 'second'
         }
     }
