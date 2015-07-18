@@ -3,6 +3,10 @@ package com.chrisgahlert.gradleguiceplugin.gradle
 import com.chrisgahlert.gradleguiceplugin.GradleInjector
 import groovy.transform.CompileStatic
 import org.gradle.api.DefaultTask
+import org.gradle.api.internal.TaskInternal
+import org.gradle.api.internal.tasks.TaskExecuter
+import org.gradle.api.internal.tasks.TaskExecutionContext
+import org.gradle.api.internal.tasks.TaskStateInternal
 
 /**
  * This task provides Guice dependency injection when used as a super class.
@@ -13,9 +17,9 @@ import org.gradle.api.DefaultTask
 @CompileStatic
 class GuiceDefaultTask extends DefaultTask {
 
-    @Override
-    public void executeWithoutThrowingTaskFailure() {
+    GuiceDefaultTask() {
+        super()
         GradleInjector.inject(getProject(), this)
-        super.executeWithoutThrowingTaskFailure()
     }
+
 }
