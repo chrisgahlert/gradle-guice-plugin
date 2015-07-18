@@ -1,6 +1,8 @@
 # gradle-guice-plugin
 
-This plugin gives plugin developers the ability to use Guice dependency injection. This is especially useful in enterprise contexts where very large and complex Gradle plugins are being created.
+This plugin gives Gradle plugin developers the ability to use Guice dependency injection. This is
+especially useful in enterprise contexts where very large and complex Gradle plugins are being
+created.
 
 ## Getting started
 
@@ -21,21 +23,7 @@ dependencies {
 Now you can make your plugins `extend` from the `GuicePlugin` class instead of implementing `Plugin<Project>`:
 ```groovy
 class MyPlugin extends GuicePlugin {
-    @Inject Gradle gradle
-    @Inject StartParameter startParameter
-    @Inject TaskExecutionGraph taskGraph
-
     @Inject Project project
-
-    @Inject ArtifactHandler artifacts
-    @Inject ConfigurationContainer configurations
-    @Inject DependencyHandler dependencies
-    @Inject ExtensionContainer extensions
-    @Inject Logger logger
-    @Inject PluginContainer plugins
-    @Inject RepositoryHandler repositories
-    @Inject TaskContainer tasks
-    
     @Inject MyInterface myInterface
     @Inject MyOtherInterface myOtherInterface
     
@@ -101,7 +89,29 @@ The following super classes are available to use:
 
 ### GuicePlugin
 
-see above
+```groovy
+class MyPlugin extends GuicePlugin {
+    @Inject Gradle gradle
+    @Inject StartParameter startParameter
+    @Inject TaskExecutionGraph taskGraph
+
+    @Inject Project project
+
+    @Inject ArtifactHandler artifacts
+    @Inject ConfigurationContainer configurations
+    @Inject DependencyHandler dependencies
+    @Inject ExtensionContainer extensions
+    @Inject Logger logger
+    @Inject PluginContainer plugins
+    @Inject RepositoryHandler repositories
+    @Inject TaskContainer tasks
+
+    @Override
+    void doApply() {
+        // your plugin code
+    }
+}
+```
 
 ### GuiceDefaultTask
 
