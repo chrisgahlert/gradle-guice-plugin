@@ -51,7 +51,7 @@ class MyModule implements Module {
 Include the following snippet in the rootProject's `build.gradle`:
 ```gradle
 ext {
-    guiceModule 'com.example.MyModule'
+    guiceModule = 'com.example.MyModule'
 }
 
 apply plugin: com.example.MyPlugin
