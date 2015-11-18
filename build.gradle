@@ -36,7 +36,7 @@ dependencies {
     compile gradleApi()
     compile 'com.google.inject:guice:4.0'
 
-    testCompile 'com.netflix.nebula:nebula-test:3.1.0'
+    testCompile 'com.netflix.nebula:nebula-test:4.0.0'
 }
 
 task sourcesJar(type: Jar, dependsOn: classes) {
