@@ -1,4 +1,4 @@
-# gradle-guice-plugin
+# gradle-guice-plugin (discontinued)
 
 This plugin gives Gradle plugin developers the ability to use Guice dependency injection. This is
 especially useful in enterprise contexts where very large and complex Gradle plugins are being
